@@ -1,0 +1,22 @@
+# load("../Tiltfile", "create_impersonation_credentials", "impersonation_resource_name")
+v1alpha1.extension_repo(name="soon", url="https://github.com/thisissoon/tilt-extensions", ref="main")
+
+v1alpha1.extension(name="gcp-impersonate", repo_name="soon", repo_path="gcp-impersonate")
+load("ext://gcp-impersonate", "create_impersonation_credentials", "impersonation_resource_name")
+
+email = "catgenerator@foo-dev.iam.gserviceaccount.com"
+creds_file = create_impersonation_credentials(email)
+creds_resource = impersonation_resource_name(email)
+
+local_resource(
+  "test",
+  cmd="echo dummy",
+  resource_deps=[creds_resource],
+  env={
+      # General use:
+      "GOOGLE_APPLICATION_CREDENTIALS": creds_file,
+
+      # When using the gcloud CLI directly:
+      "CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE": creds_file
+  }
+)
