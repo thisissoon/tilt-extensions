@@ -70,6 +70,8 @@ def create_impersonation_credentials(impersonate_email):
     resource,
     cmd=["bash", "-c", """
       mkdir -p /tmp/soon_impersonate
+      touch '{path}'
+      chmod a=,u=rw '{path}'
       echo $CREDS > '{path}'
 
       # --include-email only works with impersonated accounts, so we
