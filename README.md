@@ -9,7 +9,7 @@ Please note that the only supported platform is MacOS. Other POSIX platforms may
 Within your own Tilt file you need to first inform Tilt about this repo, you can copy this line as-is **above any load() functions**:
 
 ```python
-v1alpha1.extension_repo(name="soon", url="https://github.com/thisissoon/tilt-extensions", ref="main")
+v1alpha1.extension_repo(name="soon", url="https://github.com/thisissoon/tilt-extensions")
 ```
 
 ## Loading custom extensions

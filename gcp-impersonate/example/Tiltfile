@@ -1,5 +1,5 @@
 # load("../Tiltfile", "create_impersonation_credentials", "impersonation_resource_name")
-v1alpha1.extension_repo(name="soon", url="https://github.com/thisissoon/tilt-extensions", ref="main")
+v1alpha1.extension_repo(name="soon", url="https://github.com/thisissoon/tilt-extensions")
 
 v1alpha1.extension(name="gcp-impersonate", repo_name="soon", repo_path="gcp-impersonate")
 load("ext://gcp-impersonate", "create_impersonation_credentials", "impersonation_resource_name")
