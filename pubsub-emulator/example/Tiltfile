@@ -1,0 +1,12 @@
+# load("../Tiltfile", "create_pub_sub_topic")
+v1alpha1.extension_repo(name="soon", url="https://github.com/thisissoon/tilt-extensions", ref="main")
+
+v1alpha1.extension(name="pubsub-emulator", repo_name="soon", repo_path="pubsub-emulator")
+load("ext://pubsub-emulator", "create_pub_sub_topic")
+
+pubsub_emulator_port = "8999"
+purchase_complete_topic = "purchase.completed"
+purchase_complete_sub = "warehousesvc"
+gcloud_project = "ecom-store"
+
+create_pub_sub_topic(pubsub_emulator_port, gcloud_project, purchase_complete_topic, purchase_complete_sub)
