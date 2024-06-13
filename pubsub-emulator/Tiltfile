@@ -1,0 +1,32 @@
+#### External Functions ####
+
+# Creates a new topic, and configures the topic to send events to
+# our function whenever it recieves a message
+#
+# Params:
+#   port = The port that your PubSub emulator is running on, e.g `8899`
+#   project = The name of your Google Cloud project, e.g. `ecom-store`
+#   topic = PubSub topic name, e.g. `purchase.completed`
+#   sub = PubSub topic subscriber, e.g. `warehousesvc`
+def create_pub_sub_topic(port, project, topic, sub):
+	local_resource(
+		"init:{}:PubSub Emulator".format(topic),
+		labels="pubsub",
+		allow_parallel=False,
+		cmd="""
+			while ! curl -s -X PUT 'http://localhost:{port}/v1/projects/{project}/topics/{topic}'; do
+				sleep 1
+			done
+
+			curl -s -X PUT 'http://localhost:{port}/v1/projects/{project}/subscriptions/{sub}' \
+				-H 'Content-Type: application/json' \
+				--data '{{\
+					"topic":"projects/{project}/topics/{topic}"
+				}}'
+		""".format(
+			port=port,
+			topic=topic,
+			sub=sub,
+			project=project,
+		)
+	)

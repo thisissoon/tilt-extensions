@@ -35,4 +35,5 @@ It's a bit ugly, but it's a hard requirement.
 
 # Extensions
 
-* [gcp-impersonate](./gcp-impersonate/) - Provides an easy way to setup service account impersonation for GCP.
+- [gcp-impersonate](./gcp-impersonate/) - Provides an easy way to setup service account impersonation for GCP.
+- [pubsub-emulator](./pubsub-emulator) - Provides a function to create PubSub topics.
