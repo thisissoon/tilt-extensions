@@ -37,3 +37,4 @@ It's a bit ugly, but it's a hard requirement.
 
 - [gcp-impersonate](./gcp-impersonate/) - Provides an easy way to setup service account impersonation for GCP.
 - [pubsub-emulator](./pubsub-emulator) - Provides a function to create PubSub topics.
+- [healthchecks](./healthchecks) - Provides functions for creating healthcheck resources.

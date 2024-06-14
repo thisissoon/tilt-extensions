@@ -11,7 +11,7 @@
 #   resource_deps = Same as in Tilt-proper; an array of resource names, e.g. ["search", "pubsub"]
 #
 # Returns:
-#   name = Resource name
+#   Resource name to use in resource_deps
 def create_pub_sub_topic(port, project, topic, sub, resource_deps=[]):
 	name = "init:{}:PubSub Emulator".format(topic)
 

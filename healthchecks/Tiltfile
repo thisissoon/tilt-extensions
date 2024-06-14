@@ -1,0 +1,26 @@
+#### External Functions ####
+
+# Creates a resource that performs a health-check via cURL every second, until the cURL succeeds. Returns the resource name, so other local_resources can depend on said healthcheck.
+#
+# Params:
+#    name = Name of service you're healthchecking, e.g. "elastic-search"
+#    url = URL you want to healthcheck against, e.g. http://localhost:9200/_cat/health
+#
+# Returns:
+#    Resource name to use in resource_deps
+def create_curl_healthcheck(name, url):
+	resource_name = "{}-healthcheck".format(name)
+
+	local_resource(
+		  cmd=["bash", "-c", """
+			until curl -f {}
+			do
+				sleep 1
+			done
+			""".format(url)],
+			name=resource_name,
+			allow_parallel=True,
+			labels=["zzz_healthcheck"]
+	)
+
+	return resource_name
