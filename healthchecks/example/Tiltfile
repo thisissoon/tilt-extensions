@@ -1,0 +1,15 @@
+# load("../Tiltfile", "create_curl_healthcheck")
+v1alpha1.extension_repo(name="soon", url="https://github.com/thisissoon/tilt-extensions")
+
+v1alpha1.extension(name="healthchecks", repo_name="soon", repo_path="healthchecks")
+load("ext://healthchecks", "create_curl_healthcheck")
+
+healthCheckResourceName = create_curl_healthcheck("elastic-search", "http://localhost:9200/_cat/health")
+
+### With the retured resource name, you could use it as so
+# local_resource(
+# 	"index-elastic-search",
+# 	cmd="some-cmd",
+# 	resource_deps=[healthCheckResourceName],
+# 	...
+# )

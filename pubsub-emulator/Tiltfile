@@ -8,9 +8,15 @@
 #   project = The name of your Google Cloud project, e.g. `ecom-store`
 #   topic = PubSub topic name, e.g. `purchase.completed`
 #   sub = PubSub topic subscriber, e.g. `warehousesvc`
-def create_pub_sub_topic(port, project, topic, sub):
+#   resource_deps = Same as in Tilt-proper; an array of resource names, e.g. ["search", "pubsub"]
+#
+# Returns:
+#   Resource name to use in resource_deps
+def create_pub_sub_topic(port, project, topic, sub, resource_deps=[]):
+	name = "init:{}:PubSub Emulator".format(topic)
+
 	local_resource(
-		"init:{}:PubSub Emulator".format(topic),
+		name,
 		labels="pubsub",
 		allow_parallel=False,
 		cmd="""
@@ -28,5 +34,7 @@ def create_pub_sub_topic(port, project, topic, sub):
 			topic=topic,
 			sub=sub,
 			project=project,
-		)
+		),
+		resource_deps=resource_deps,
 	)
+	return name

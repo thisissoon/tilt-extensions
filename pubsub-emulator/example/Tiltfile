@@ -9,4 +9,4 @@ purchase_complete_topic = "purchase.completed"
 purchase_complete_sub = "warehousesvc"
 gcloud_project = "ecom-store"
 
-create_pub_sub_topic(pubsub_emulator_port, gcloud_project, purchase_complete_topic, purchase_complete_sub)
+completeResourceName = create_pub_sub_topic(pubsub_emulator_port, gcloud_project, purchase_complete_topic, purchase_complete_sub)
