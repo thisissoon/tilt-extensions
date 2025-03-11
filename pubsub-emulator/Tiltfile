@@ -18,7 +18,7 @@ def create_pub_sub_topic(port, project, topic, sub, resource_deps=[]):
 	local_resource(
 		name,
 		labels="pubsub",
-		allow_parallel=False,
+		allow_parallel=True,
 		cmd="""
 			while ! curl -s -X PUT 'http://localhost:{port}/v1/projects/{project}/topics/{topic}'; do
 				sleep 1
